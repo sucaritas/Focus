@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus", "Focus\Focus.csproj", "{DAEDBF3E-6013-4AE0-BFF1-A62BBB03D3E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FocusUsage", "FocusUsage\FocusUsage.csproj", "{D3DF9EED-9075-49E5-906D-1DACC44DF84C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAEDBF3E-6013-4AE0-BFF1-A62BBB03D3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAEDBF3E-6013-4AE0-BFF1-A62BBB03D3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAEDBF3E-6013-4AE0-BFF1-A62BBB03D3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAEDBF3E-6013-4AE0-BFF1-A62BBB03D3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3DF9EED-9075-49E5-906D-1DACC44DF84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3DF9EED-9075-49E5-906D-1DACC44DF84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3DF9EED-9075-49E5-906D-1DACC44DF84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3DF9EED-9075-49E5-906D-1DACC44DF84C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B944D10-00A8-48C4-B5A6-75D2D2A6A32C}
+	EndGlobalSection
+EndGlobal

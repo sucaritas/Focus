@@ -1,0 +1,14 @@
+﻿{
+  "StringProperty": "This is a string",
+  "StringArrayProperty": [ "This", "is", "an", "array" ],
+  "IntProperty": 123456,
+  "IntArrayProperty": [ 1, 2, 3, 4, 5, 6 ],
+  "NestedProperty|kk": 
+  {
+    "StringProperty": "This is a Nested Object",
+    "StringArrayProperty": [ "This", "is", "an", "array", "Nested" ],
+    "IntProperty": 456789,
+    "IntArrayProperty": [ 4,5,6,7,8,9 ],
+    "NestedProperty": null
+  }
+}
