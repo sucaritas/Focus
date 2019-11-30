@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestFiles\Scalar.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="TestFiles\SubObject.json.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestFiles\Scalar.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -28,6 +21,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Focus\Focus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestFiles\RootObject.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

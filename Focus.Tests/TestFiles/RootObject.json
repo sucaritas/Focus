@@ -1,0 +1,22 @@
+﻿{
+  "RootObject": "##RootObject2##",
+
+  "RootObject2": {
+    "RootKey": "##RootObject3##"
+  },
+
+  "RootObject3|key:value": {
+    "intProp": 1,
+    "FloatProp": 1.1,
+    "StringProp": "##RootObject4##",
+    "intArray": [ 1 ],
+    "StringArray": [ "s1" ]
+  },
+  "RootObject3": "##RootObject4##",
+
+  "RootObject4": "This is root object 4",
+
+  "test": {
+    "Sub": "##RootObject##"
+  }
+}

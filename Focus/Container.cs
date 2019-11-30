@@ -68,7 +68,12 @@
             return this.IsArray ? FocusArray(lenses, rootObjects) : FocusObject(lenses, rootObjects);
         }
 
-        public JToken Focus(Dictionary<string, string> lenses = null)
+        public JToken Focus()
+        {
+            return this.Focus(new Dictionary<string, string>());
+        }
+
+        public JToken Focus(Dictionary<string, string> lenses)
         {
             lenses = lenses ?? new Dictionary<string, string>();
             JToken result;
