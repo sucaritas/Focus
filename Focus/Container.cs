@@ -16,7 +16,7 @@
         private readonly string JSON;
         private JToken jsonObject;
         public bool IsArray { get; private set; }
-        public bool CacheResults { get; set; }
+        public bool CacheResults { get; set; } = true;
 
         #region Constructors
         public Container(string json)
@@ -174,7 +174,7 @@
             return convertedObject;
         }
 
-        private string GetCacheKey(Dictionary<string, string> lenses)
+        private static string GetCacheKey(Dictionary<string, string> lenses)
         {
             return string.Join("|", lenses.OrderBy(x => x.Key).Select(x => x.Key + ":" + x.Value));
         }
