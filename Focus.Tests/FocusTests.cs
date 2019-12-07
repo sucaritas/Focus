@@ -28,8 +28,9 @@ namespace Focus.Tests
         {
             var json = File.ReadAllText(@"TestFiles\Scalar.json");
             var container = new Focus.Container(json);
+            container.Constants.Add("Constant");
 
-            var jtoken = container.Focus(new System.Collections.Generic.Dictionary<string, string>() { { "Constant", "" } });
+            var jtoken = container.Focus();
             Assert.AreEqual(2, jtoken.Value<int>("intProp"));
             Assert.AreEqual(2.2f, jtoken.Value<float>("FloatProp"));
             Assert.AreEqual("String Value 2", jtoken.Value<string>("StringProp"));
@@ -56,8 +57,9 @@ namespace Focus.Tests
         {
             var json = File.ReadAllText(@"TestFiles\Scalar.json");
             var container = new Focus.Container(json);
+            container.Constants.Add("Constant");
 
-            var jtoken = container.Focus(new System.Collections.Generic.Dictionary<string, string>() { { "Constant", "" }, { "key", "value" } });
+            var jtoken = container.Focus(new Dictionary<string, string>() { { "key", "value" } });
             Assert.AreEqual(3, jtoken.Value<int>("intProp"));
             Assert.AreEqual(3.3f, jtoken.Value<float>("FloatProp"));
             Assert.AreEqual("String Value 3", jtoken.Value<string>("StringProp"));
@@ -70,8 +72,10 @@ namespace Focus.Tests
         {
             var json = File.ReadAllText(@"TestFiles\Scalar.json");
             var container = new Focus.Container(json);
+            container.Constants.Add("Constant");
+            container.Constants.Add("Constant2");
 
-            var jtoken = container.Focus(new System.Collections.Generic.Dictionary<string, string>() { { "Constant", "" }, { "Constant2", "" }, { "key", "value" } });
+            var jtoken = container.Focus(new Dictionary<string, string>() { { "key", "value" } });
             Assert.AreEqual(3, jtoken.Value<int>("intProp"));
             Assert.AreEqual(3.3f, jtoken.Value<float>("FloatProp"));
             Assert.AreEqual("String Value 3", jtoken.Value<string>("StringProp"));

@@ -17,6 +17,7 @@
         private JToken jsonObject;
         public bool IsArray { get; private set; }
         public bool CacheResults { get; set; } = true;
+        public ConcurrentBag<string> Constants { get; private set; } = new ConcurrentBag<string>();
 
         #region Constructors
         public Container(string json)
@@ -106,6 +107,7 @@
                 return array;
             }
 
+            lenses = InjectConstants(lenses);
             foreach (var obj in this.ContainerObjects)
             {
                 array.Add(obj.Value.Focus(lenses, rootObjects));
@@ -127,6 +129,7 @@
                 return jObject;
             }
 
+            lenses = InjectConstants(lenses);
             foreach (var obj in this.ContainerObjects)
             {
                 jObject.Add(obj.Key, obj.Value.Focus(lenses, rootObjects));
@@ -177,6 +180,37 @@
         private static string GetCacheKey(Dictionary<string, string> lenses)
         {
             return string.Join("|", lenses.OrderBy(x => x.Key).Select(x => x.Key + ":" + x.Value));
+        }
+
+        private Dictionary<string, string> InjectConstants(Dictionary<string, string> original)
+        {
+            var dic = new Dictionary<string, string>(original);
+            foreach (var constant in Constants)
+            {
+                if (!dic.ContainsKey(constant))
+                {
+                    dic.Add(constant, string.Empty);
+                }
+            }
+            return dic;
+        }
+
+        public void AddConstantRange(IEnumerable<string> constants)
+        {
+            if (constants == null)
+            {
+                return;
+            }
+
+            foreach (var constant in constants)
+            {
+                this.Constants.Add(constant);
+            }
+        }
+
+        public void ClearConstants()
+        {
+            this.Constants = new ConcurrentBag<string>();
         }
     }
 }
