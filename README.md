@@ -45,7 +45,7 @@ You can switch values even across types. For example:
 	"Config_1|Int": 1,
 	"Config_1|Float": 1.1,
 	"Config_1|String": "Hey",
-	"Config_1|Object": { "SubItem1": 1.0, SubItem2: "Hello" },
+	"Config_1|Object": { "SubItem1": 1.0, "SubItem2": "Hello" },
 	"Config_1": "Default",
 }
 ```
