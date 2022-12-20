@@ -10,12 +10,12 @@
     {
         private struct PropertyTuple
         {
-            public List<string> lenses;
+            public IList<string> lenses;
             public JToken jToken;
             public Container Container;
         }
 
-        private List<PropertyTuple> items = new List<PropertyTuple>();
+        private IList<PropertyTuple> items = new List<PropertyTuple>();
 
         public void Add(IDictionary<string, string> lenses, JToken value)
         {
