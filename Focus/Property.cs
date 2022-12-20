@@ -17,7 +17,7 @@
 
         private List<PropertyTuple> items = new List<PropertyTuple>();
 
-        public void Add(Dictionary<string, string> lenses, JToken value)
+        public void Add(IDictionary<string, string> lenses, JToken value)
         {
             if (lenses == null) { throw new ArgumentException(nameof(lenses) + " cannot be null"); }
 
@@ -42,7 +42,7 @@
         ///     "SimpleProperty|Constatnt|SomeLens:WithValue" : {/*Some value*/},
         /// }
         /// </summary>
-        internal static bool TryParsePropertyName(JProperty property, out string propertyName, out Dictionary<string, string> lenses)
+        internal static bool TryParsePropertyName(JProperty property, out string propertyName, out IDictionary<string, string> lenses)
         {
             var propertyParts = property.Name.Split('|');
             propertyName = propertyParts[0];
@@ -56,7 +56,7 @@
             return true;
         }
 
-        public static Dictionary<string, Property> GetRootObjects(JToken container)
+        public static IDictionary<string, Property> GetRootObjects(JToken container)
         {
             var ret = new Dictionary<string, Property>();
             Property prop;
@@ -82,7 +82,7 @@
             foreach (var property in obj.Properties())
             {
                 string propertyName;
-                Dictionary<string, string> lenses;
+                IDictionary<string, string> lenses;
                 if (!Property.TryParsePropertyName(property, out propertyName, out lenses))
                 {
                     throw new FormatException("Could not parse property " + property.Name + " on path " + property.Path);
@@ -100,7 +100,7 @@
             return ret;
         }
 
-        public JToken Focus(Dictionary<string, string> lenses, Dictionary<string, Property> rootObjects)
+        public JToken Focus(IDictionary<string, string> lenses, IDictionary<string, Property> rootObjects)
         {
             var lensesSet = lenses.Select(x => x.Key.Trim() + ":" + x.Value.Trim()).ToList();
             PropertyTuple tuple = this.items.FirstOrDefault(x=> !x.lenses.Except(lensesSet).Any());

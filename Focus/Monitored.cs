@@ -13,7 +13,7 @@
         private FileSystemWatcher fileSystemWatcher { get; set; }
         private object fileLock = new object();
 
-        public Monitored(string filePath)
+        public Monitored(string filePath, IList<string> constants = null)
         {
             if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
             {
@@ -23,6 +23,18 @@
             this.filePath = filePath;
             var json = File.ReadAllText(filePath);
             this.container = new Focus.Container(json);
+            if (constants != null && constants.Count > 0)
+            {
+                foreach (var c in constants)
+                {
+                    if(string.IsNullOrWhiteSpace(c))
+                    {
+                        continue;
+                    }
+
+                    this.container.Constants.Add(c);
+                }
+            }
 
             this.fileSystemWatcher = new FileSystemWatcher(Path.GetDirectoryName(filePath));
             this.fileSystemWatcher.Filter = Path.GetFileName(filePath);
@@ -51,7 +63,7 @@
             return container.Focus();
         }
 
-        public JToken Focus(Dictionary<string, string> lenses)
+        public JToken Focus(IDictionary<string, string> lenses)
         {
             return container.Focus(lenses);
         }
@@ -61,7 +73,7 @@
             return container.Focus<T>();
         }
 
-        public T Focus<T>(Dictionary<string, string> lenses)
+        public T Focus<T>(IDictionary<string, string> lenses)
         {
             return container.Focus<T>(lenses);
         }

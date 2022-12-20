@@ -9,8 +9,8 @@
 
     public class Container
     {
-        internal Dictionary<string, Property> RootObjects { get; set; } = new Dictionary<string, Property>();
-        internal Dictionary<string, Property> ContainerObjects { get; set; } = new Dictionary<string, Property>();
+        internal IDictionary<string, Property> RootObjects { get; set; } = new Dictionary<string, Property>();
+        internal IDictionary<string, Property> ContainerObjects { get; set; } = new Dictionary<string, Property>();
         private ConcurrentDictionary<string, ConcurrentDictionary<Type, object>> TypeCache { get; } = new ConcurrentDictionary<string, ConcurrentDictionary<Type, object>>();
         private ConcurrentDictionary<string, JToken> JTokenCache { get; } = new ConcurrentDictionary<string, JToken>();
         private readonly string JSON;
@@ -44,7 +44,7 @@
             init(jobject);
         }
 
-        internal Container(JToken jobject, Dictionary<string, Property> rootObjects)
+        internal Container(JToken jobject, IDictionary<string, Property> rootObjects)
         {
             this.RootObjects = rootObjects;
             init(jobject);
@@ -64,7 +64,7 @@
 
         #endregion
 
-        internal JToken Focus(Dictionary<string, string> lenses, Dictionary<string, Property> rootObjects)
+        internal JToken Focus(IDictionary<string, string> lenses, IDictionary<string, Property> rootObjects)
         {
             return this.IsArray ? FocusArray(lenses, rootObjects) : FocusObject(lenses, rootObjects);
         }
@@ -74,7 +74,7 @@
             return this.Focus(new Dictionary<string, string>());
         }
 
-        public JToken Focus(Dictionary<string, string> lenses)
+        public JToken Focus(IDictionary<string, string> lenses)
         {
             lenses = lenses ?? new Dictionary<string, string>();
             JToken result;
@@ -94,7 +94,7 @@
             return result;
         }
 
-        private JToken FocusArray(Dictionary<string, string> lenses, Dictionary<string, Property> rootObjects)
+        private JToken FocusArray(IDictionary<string, string> lenses, IDictionary<string, Property> rootObjects)
         {
             if ((this.jsonObject as JArray) == null)
             {
@@ -116,7 +116,7 @@
             return array;
         }
 
-        private JToken FocusObject(Dictionary<string, string> lenses, Dictionary<string, Property> rootObjects)
+        private JToken FocusObject(IDictionary<string, string> lenses, IDictionary<string, Property> rootObjects)
         {
             if (this.jsonObject == null)
             {
@@ -143,7 +143,7 @@
             return this.Focus<T>(new Dictionary<string, string>());
         }
 
-        public T Focus<T>(Dictionary<string, string> lenses)
+        public T Focus<T>(IDictionary<string, string> lenses)
         {
             if (lenses == null)
             {
@@ -177,12 +177,12 @@
             return convertedObject;
         }
 
-        private static string GetCacheKey(Dictionary<string, string> lenses)
+        private static string GetCacheKey(IDictionary<string, string> lenses)
         {
             return string.Join("|", lenses.OrderBy(x => x.Key).Select(x => x.Key + ":" + x.Value));
         }
 
-        private Dictionary<string, string> InjectConstants(Dictionary<string, string> original)
+        private IDictionary<string, string> InjectConstants(IDictionary<string, string> original)
         {
             var dic = new Dictionary<string, string>(original);
             foreach (var constant in Constants)
