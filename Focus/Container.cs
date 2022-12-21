@@ -150,6 +150,7 @@
                 throw new ArgumentNullException(nameof(lenses));
             }
 
+            var typeOfT = typeof(T);
             if (this.CacheResults)
             {
                 var key = GetCacheKey(lenses);
@@ -157,7 +158,7 @@
                 ConcurrentDictionary<Type, object> innerCache;
 
                 innerCache = this.TypeCache.GetOrAdd(key, new ConcurrentDictionary<Type, object>());
-                if (innerCache.TryGetValue(typeof(T), out value))
+                if (innerCache.TryGetValue(typeOfT, out value))
                 {
                     return (T)value;
                 }
@@ -171,6 +172,7 @@
                 var key = GetCacheKey(lenses);
                 ConcurrentDictionary<Type, object> innerCache;
                 innerCache = this.TypeCache.GetOrAdd(key, new ConcurrentDictionary<Type, object>());
+                innerCache.GetOrAdd(typeOfT, convertedObject);
                 this.TypeCache.AddOrUpdate(key, innerCache, (o, obj) => innerCache);
             }
 
