@@ -11,7 +11,6 @@
         private string filePath { get; set; }
         private Container container { get; set; }
         private FileSystemWatcher fileSystemWatcher { get; set; }
-        private object fileLock = new object();
 
         public Monitored(string filePath, IList<string> constants = null)
         {
@@ -39,21 +38,19 @@
             this.fileSystemWatcher = new FileSystemWatcher(Path.GetDirectoryName(filePath));
             this.fileSystemWatcher.Filter = Path.GetFileName(filePath);
             this.fileSystemWatcher.Changed += OnChanged;
+            this.fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size;
             this.fileSystemWatcher.EnableRaisingEvents = true;
         }
 
         private void OnChanged(object source, FileSystemEventArgs e)
         {
-            lock (fileLock)
+            lock (fileSystemWatcher)
             {
-                this.fileSystemWatcher.EnableRaisingEvents = false;
-
                 // Because the file was changed it mean that the file might not have closed yet.
-                // Sleeping here to give a chance ofr it to close.
+                // Sleeping here to give a chance for it to close.
                 System.Threading.Thread.Sleep(100);
                 var json = File.ReadAllText(this.filePath);
                 this.container = new Focus.Container(json);
-                this.fileSystemWatcher.EnableRaisingEvents = true;
             }
         }
 
