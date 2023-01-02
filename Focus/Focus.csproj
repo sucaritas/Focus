@@ -6,7 +6,7 @@
     <Description>Focus is a small configuration library for systems that require varying values bases on state, query, or overall changes.</Description>
     <RepositoryUrl>https://github.com/sucaritas/Focus</RepositoryUrl>
     <PackageTags>Configuration Library</PackageTags>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <Title>Focus library</Title>
     <Authors>Julio Saenz</Authors>
     <Company />
