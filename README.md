@@ -1,5 +1,5 @@
 # Focus
-A flexible configuration library for any application which needs a varying configuration, this could be to vary from request to request or from process to process, or simply from time to time.
+A flexible configuration library for any application which needs a varying configuration, this could be to vary from request to request in the case of a web app (think diferent languages) or from process to process, or simply from time to time.
 It is simple to use and it is light weight. Focus reads a marked up json and creates a store of configs which then can be queried. 
 
 
@@ -13,11 +13,11 @@ The syntax is simple, every config in the json has a property name and an option
 }
 ```
 
-**Config_1** is the name of the name of the configuration.
-**key:value** is a pair of key value variation **key** is the key and **value** is the value.
-**Constant** is a constant reoresented in the dictionary as a key without value.
+**Config_1** is the name of config. property  
+**key:value** is a pair of key value variation **key** is the "name" of the variation and **value** is the value of the variation (for example **Language:En-US**).  
+**Constant** is a constant represented in the dictionary as a key without value.  
 
-matching rules are simple as well, each property is evaluated based on the declared order. The first property that matched is able to satisfy all of its own constraints gets selected.   
+Matching rules are simple as well, each property is evaluated based on the declared order. The first entry in the property that matches all of its constraints gets selected.   
 Constraints are groupd all together into a dictionary. Constants are added as Keys with a empty string value.
 
 ```C#
